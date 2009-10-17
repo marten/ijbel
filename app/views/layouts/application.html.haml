@@ -1,0 +1,21 @@
+!!!XML
+!!!
+
+%html{:xmlns=>"http://www.w3.org/1999/xhtml", "xml:lang"=>"en", :lang=>"en"}
+  %head
+    %meta{"http-equiv"=>"content-type", :content=>"text/html;charset=UTF-8"}
+    %title IJbel
+    = stylesheet_link_tag 'reset'
+    = stylesheet_link_tag 'screen'
+    = stylesheet_link_tag "formtastic"
+    = stylesheet_link_tag "formtastic_changes"
+
+  %body
+    #masthead
+      %ul#navigation
+        %li= link_to "Triggers",  triggers_path
+        %li= link_to "Responses", responses_path
+
+    #content
+      %p{:style=>"color: green"}= flash[:notice]
+      = yield

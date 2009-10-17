@@ -1,0 +1,13 @@
+%h1
+  Response:
+  = @response.value
+
+= collection_table @response.triggers do |t|
+  - t.header :id
+  - t.header :value
+
+  - t.rows.each do |row, trigger, index|
+    - row.value             link_to(trigger.value, trigger)
+
+= link_to 'Edit', edit_response_path(@response)
+= link_to 'Back', responses_path

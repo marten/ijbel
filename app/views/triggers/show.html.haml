@@ -1,0 +1,13 @@
+%h1
+  Trigger: 
+  = @trigger.value
+
+= collection_table @trigger.responses do |t|
+  - t.header :id
+  - t.header :value
+
+  - t.rows.each do |row, response, index|
+    - row.value             link_to(response.value.split("\n").join("<br/>"), response)
+
+= link_to 'Edit', edit_trigger_path(@trigger)
+= link_to 'Back', triggers_path
