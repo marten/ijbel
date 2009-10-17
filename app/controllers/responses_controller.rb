@@ -1,9 +1,9 @@
 class ResponsesController < ApplicationController
-  # GET /responses
-  # GET /responses.xml
+  
+  before_filter :find_factoid, :only => [:index, :show, :new, :edit, :create, :update, :destroy]
+  
   def index
-    @responses = Response.paginate(:page => params[:page], :order => 'value ASC')
-    @responses_total_count = Response.count
+    @responses = @factoid.responses.paginate(:page => params[:page], :order => 'value ASC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -11,10 +11,8 @@ class ResponsesController < ApplicationController
     end
   end
 
-  # GET /responses/1
-  # GET /responses/1.xml
   def show
-    @response = Response.find(params[:id])
+    @response = @factoid.responses.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -22,8 +20,6 @@ class ResponsesController < ApplicationController
     end
   end
 
-  # GET /responses/new
-  # GET /responses/new.xml
   def new
     @response = Response.new
 
@@ -83,4 +79,15 @@ class ResponsesController < ApplicationController
       format.xml  { head :ok }
     end
   end
+
+  def random
+    @response = Response.find(:first, :order => "RANDOM()")
+    render :action => :show
+  end
+  
+  protected
+    def find_factoid
+      @factoid = Factoid.find(params[:factoid_id])
+    end
+
 end

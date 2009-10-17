@@ -1,3 +1,6 @@
 class Trigger < ActiveRecord::Base
-  has_and_belongs_to_many :responses
+  belongs_to :factoid
+  has_many :responses, :through => :factoid
+  
+  validates_presence_of :value
 end

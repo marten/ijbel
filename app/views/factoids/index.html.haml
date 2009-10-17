@@ -1,0 +1,20 @@
+%h1 Listing factoids
+
+= link_to 'New factoid', new_factoid_path
+
+%table
+	%thead
+		%tr
+			%th ID
+			%th Triggers
+			%th Responses
+			%th Actions
+	%tbody
+		- @factoids.each do |factoid|
+			%tr
+				%td= link_to(factoid.id, factoid)
+				%td= factoid.triggers.map(&:value).map{|i| h(i)}.join("<br/>")
+				%td= factoid.responses.map(&:value).map{|i| h(i)}.join("<br/>")
+				%td= link_to("Edit", edit_factoid_path(factoid)) + " | " + link_to("Destroy", factoid, :method => :delete)
+
+= will_paginate @factoids

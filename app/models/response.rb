@@ -1,3 +1,6 @@
 class Response < ActiveRecord::Base
-  has_and_belongs_to_many :triggers
+  belongs_to :factoid
+  has_many :triggers, :through => :factoid
+  
+  validates_presence_of :value
 end

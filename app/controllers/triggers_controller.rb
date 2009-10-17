@@ -1,4 +1,7 @@
 class TriggersController < ApplicationController
+
+  before_filter :find_factoid
+  
   # GET /triggers
   # GET /triggers.xml
   def index
@@ -82,4 +85,9 @@ class TriggersController < ApplicationController
       format.xml  { head :ok }
     end
   end
+  
+  protected
+    def find_factoid
+      @factoid = Factoid.find(params[:factoid_id])
+    end
 end

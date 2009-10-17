@@ -2,6 +2,27 @@ body {
   font-family: Helvetica, sans-serif;
   font-size: 0.8em; }
 
+h1 {
+  font-size: 1.5em;
+  font-family: Georgia, serif; }
+
+a:hover {
+  background: black;
+  color: white; }
+
+table {
+  width: 100%;
+  border-collapse: collapse; }
+  table thead tr th {
+    background: black;
+    color: white;
+    padding: 5px;
+    border: 1px solid #000; }
+  table td {
+    padding: 5px;
+    border: 1px solid #eee;
+    vertical-align: top; }
+
 #navigation {
   background: #eee;
   border-bottom: 1px solid #ccc;
@@ -12,23 +33,20 @@ body {
     #navigation li a {
       display: block;
       padding: 5px;
+      border-right: 1px solid #ccc;
       text-decoration: none; }
     #navigation li.active a {
       background: #ccc; }
 
 #content {
   margin: 2em; }
+  #content .pagination {
+    text-align: center; }
 
-table {
-  border: 1px;
-  width: 100%; }
-  table thead tr th {
-    background: black;
-    color: white; }
-  table td {
-    padding: 5px;
-    border: 1px; }
-
-a:hover {
-  background: black;
-  color: white; }
+#response {
+  font-size: 3em;
+  font-family: Georgia, serif;
+  text-align: center;
+  margin: 4em;
+  padding: 1em;
+  border: 1px dotted #ccc; }

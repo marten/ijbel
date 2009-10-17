@@ -9,23 +9,25 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091017131649) do
+ActiveRecord::Schema.define(:version => 20091017205617) do
+
+  create_table "factoids", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "responses", :force => true do |t|
     t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "responses_triggers", :id => false, :force => true do |t|
-    t.integer "trigger_id"
-    t.integer "response_id"
+    t.integer  "factoid_id"
   end
 
   create_table "triggers", :force => true do |t|
     t.string   "value"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "factoid_id"
   end
 
 end

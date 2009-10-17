@@ -1,0 +1,25 @@
+%h1== Factoid no. #{@factoid.id}
+
+%table
+	%thead
+		%tr
+			%th(style="width: 50%") Triggers
+			%th(style="width: 50%") Responses
+	%tbody
+		- (0..([@factoid.triggers.size, @factoid.responses.size].max - 1)).each do |idx|
+			%tr
+				- if idx < @factoid.triggers.size
+					- trigger = @factoid.triggers[idx]
+					%td= link_to(h(trigger.value), factoid_trigger_path(@factoid, trigger))
+				- else
+					%td
+
+				- if idx < @factoid.responses.size
+					- response = @factoid.responses[idx]
+					%td= link_to(h(response.value), factoid_response_path(@factoid, response))
+				- else
+					%td
+		%tr
+			%td= link_to("Add trigger", new_factoid_trigger_path(@factoid))
+			%td= link_to("Add response", new_factoid_response_path(@factoid))
+						
