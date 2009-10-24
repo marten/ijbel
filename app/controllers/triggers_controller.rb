@@ -2,10 +2,8 @@ class TriggersController < ApplicationController
 
   before_filter :find_factoid
   
-  # GET /triggers
-  # GET /triggers.xml
   def index
-    @triggers = Trigger.paginate(:page => params[:page], :order => "value ASC", :include => :responses)
+    @triggers = @factoid.triggers.paginate(:page => params[:page], :order => "value ASC", :include => :responses)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -13,10 +11,8 @@ class TriggersController < ApplicationController
     end
   end
 
-  # GET /triggers/1
-  # GET /triggers/1.xml
   def show
-    @trigger = Trigger.find(params[:id])
+    @trigger = @factoid.triggers.find(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -24,10 +20,8 @@ class TriggersController < ApplicationController
     end
   end
 
-  # GET /triggers/new
-  # GET /triggers/new.xml
   def new
-    @trigger = Trigger.new
+    @trigger = @factoid.triggers.build
 
     respond_to do |format|
       format.html # new.html.erb
@@ -35,20 +29,17 @@ class TriggersController < ApplicationController
     end
   end
 
-  # GET /triggers/1/edit
   def edit
-    @trigger = Trigger.find(params[:id])
+    @trigger = @factoid.triggers.find(params[:id])
   end
 
-  # POST /triggers
-  # POST /triggers.xml
   def create
-    @trigger = Trigger.new(params[:trigger])
+    @trigger = @factoid.triggers.build(params[:trigger])
 
     respond_to do |format|
       if @trigger.save
         flash[:notice] = 'Trigger was successfully created.'
-        format.html { redirect_to(@trigger) }
+        format.html { redirect_to(factoid_path(@factoid)) }
         format.xml  { render :xml => @trigger, :status => :created, :location => @trigger }
       else
         format.html { render :action => "new" }
@@ -57,10 +48,8 @@ class TriggersController < ApplicationController
     end
   end
 
-  # PUT /triggers/1
-  # PUT /triggers/1.xml
   def update
-    @trigger = Trigger.find(params[:id])
+    @trigger = @factoid.triggers.find(params[:id])
 
     respond_to do |format|
       if @trigger.update_attributes(params[:trigger])
@@ -74,14 +63,14 @@ class TriggersController < ApplicationController
     end
   end
 
-  # DELETE /triggers/1
-  # DELETE /triggers/1.xml
   def destroy
-    @trigger = Trigger.find(params[:id])
+    @trigger = @factoid.triggers.find(params[:id])
     @trigger.destroy
 
+    flash[:notice] = "Trigger \`\`#{@trigger.value}'' destroyed."
+
     respond_to do |format|
-      format.html { redirect_to(triggers_url) }
+      format.html { redirect_to(factoid_url(@factoid)) }
       format.xml  { head :ok }
     end
   end

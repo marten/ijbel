@@ -1,0 +1,5 @@
+- form_tag(delete_factoid_path, :method => :post) do
+	Reassign triggers/responses to factoid with id:
+	= text_field_tag("destination")
+	and
+	= submit_tag("Delete")

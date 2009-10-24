@@ -10,16 +10,27 @@
 			%tr
 				- if idx < @factoid.triggers.size
 					- trigger = @factoid.triggers[idx]
-					%td= link_to(h(trigger.value), factoid_trigger_path(@factoid, trigger))
+					%td
+						= h(trigger.value)
+						= link_to("Delete", factoid_trigger_path(@factoid, trigger), :method => :delete)
 				- else
 					%td
 
 				- if idx < @factoid.responses.size
 					- response = @factoid.responses[idx]
-					%td= link_to(h(response.value), factoid_response_path(@factoid, response))
+					%td
+						= h(response.value)
+						= link_to("Delete", factoid_response_path(@factoid, response), :method => :delete)
 				- else
 					%td
 		%tr
-			%td= link_to("Add trigger", new_factoid_trigger_path(@factoid))
-			%td= link_to("Add response", new_factoid_response_path(@factoid))
+			%td
+				- semantic_form_for(@factoid.triggers.build, :url => factoid_triggers_path(@factoid)) do |f|
+					= f.inputs :value
+					= f.buttons
+					
+			%td
+				- semantic_form_for(@factoid.responses.build, :url => factoid_responses_path(@factoid)) do |f|
+					= f.inputs :value
+					= f.buttons
 						

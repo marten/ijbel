@@ -1,20 +1,24 @@
-%h1 Listing factoids
+%h1
+	Listing factoids
+	= "for \`\`#{params[:q]}''" unless params[:q].blank?
 
 = link_to 'New factoid', new_factoid_path
+
+= render :partial => "search"
 
 %table
 	%thead
 		%tr
-			%th ID
-			%th Triggers
+			%th(style="width: 30px") ID
+			%th(style="width: 40%") Triggers
 			%th Responses
-			%th Actions
+			%th(style="width: 100px") Actions
 	%tbody
 		- @factoids.each do |factoid|
 			%tr
 				%td= link_to(factoid.id, factoid)
 				%td= factoid.triggers.map(&:value).map{|i| h(i)}.join("<br/>")
 				%td= factoid.responses.map(&:value).map{|i| h(i)}.join("<br/>")
-				%td= link_to("Edit", edit_factoid_path(factoid)) + " | " + link_to("Destroy", factoid, :method => :delete)
+				%td= link_to("Delete", delete_factoid_path(factoid))
 
 = will_paginate @factoids

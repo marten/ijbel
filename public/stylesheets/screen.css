@@ -12,7 +12,8 @@ a:hover {
 
 table {
   width: 100%;
-  border-collapse: collapse; }
+  border-collapse: collapse;
+  margin-bottom: 1.5em; }
   table thead tr th {
     background: black;
     color: white;
@@ -41,7 +42,13 @@ table {
 #content {
   margin: 2em; }
   #content .pagination {
+    font-size: 1.2em;
     text-align: center; }
+    #content .pagination a {
+      padding: 5px; }
+    #content .pagination .current {
+      padding: 5px;
+      background: #eee; }
 
 #response {
   font-size: 3em;
@@ -50,3 +57,8 @@ table {
   margin: 4em;
   padding: 1em;
   border: 1px dotted #ccc; }
+
+#search {
+  margin-top: -3em;
+  line-height: 3em;
+  text-align: right; }

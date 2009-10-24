@@ -1,0 +1,5 @@
+#search
+	- form_tag(search_factoids_path, :method => :get) do
+		Search for
+		= text_field_tag "q", params[:q]
+		= submit_tag "Search"

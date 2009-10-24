@@ -21,7 +21,7 @@ class ResponsesController < ApplicationController
   end
 
   def new
-    @response = Response.new
+    @response = @factoid.responses.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -31,18 +31,16 @@ class ResponsesController < ApplicationController
 
   # GET /responses/1/edit
   def edit
-    @response = Response.find(params[:id])
+    @response = @factoid.responses.find(params[:id])
   end
 
-  # POST /responses
-  # POST /responses.xml
   def create
-    @response = Response.new(params[:response])
+    @response = @factoid.responses.build(params[:response])
 
     respond_to do |format|
       if @response.save
         flash[:notice] = 'Response was successfully created.'
-        format.html { redirect_to(@response) }
+        format.html { redirect_to(factoid_path(@factoid)) }
         format.xml  { render :xml => @response, :status => :created, :location => @response }
       else
         format.html { render :action => "new" }
@@ -51,15 +49,13 @@ class ResponsesController < ApplicationController
     end
   end
 
-  # PUT /responses/1
-  # PUT /responses/1.xml
   def update
-    @response = Response.find(params[:id])
+    @response = @factoid.responses.find(params[:id])
 
     respond_to do |format|
       if @response.update_attributes(params[:response])
         flash[:notice] = 'Response was successfully updated.'
-        format.html { redirect_to(@response) }
+        format.html { redirect_to(factoid_path(@factoid)) }
         format.xml  { head :ok }
       else
         format.html { render :action => "edit" }
@@ -68,14 +64,12 @@ class ResponsesController < ApplicationController
     end
   end
 
-  # DELETE /responses/1
-  # DELETE /responses/1.xml
   def destroy
-    @response = Response.find(params[:id])
+    @response = @factoid.responses.find(params[:id])
     @response.destroy
 
     respond_to do |format|
-      format.html { redirect_to(responses_url) }
+      format.html { redirect_to(factoid_url(@factoid)) }
       format.xml  { head :ok }
     end
   end
