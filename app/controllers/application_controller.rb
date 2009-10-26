@@ -2,6 +2,18 @@
 # Likewise, all the methods added will be available for all controllers.
 
 class ApplicationController < ActionController::Base
+  USERNAME, PASSWORD = "#brak", "afwas"
+  
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  
+  before_filter :authenticate
+  
+  private
+    def authenticate
+      authenticate_or_request_with_http_basic do |username, password|
+        username == USERNAME && password == PASSWORD
+      end
+    end
+    
 end
