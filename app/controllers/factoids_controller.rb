@@ -18,7 +18,8 @@ class FactoidsController < ApplicationController
     if params[:q]
       triggers  = Trigger.all( :conditions => ["value LIKE ?", "%#{params[:q]}%"])
       responses = Response.all(:conditions => ["value LIKE ?", "%#{params[:q]}%"])
-      @factoids = (triggers.map(&:factoid) + responses.map(&:factoid)).uniq.paginate(params)
+      @factoids = (triggers.map  {|t| t.factoid(:include => [:triggers, :responses]) } + 
+                   responses.map {|r| r.factoid(:include => [:triggers, :responses]) }).uniq.paginate(params)
       render :action => :index
     end
   end
