@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   private
     def authenticate
       authenticate_or_request_with_http_basic do |username, password|
-        username == USERNAME && password == PASSWORD
+        (Rails.env.development?) || (username == USERNAME && password == PASSWORD)
       end
     end
     
