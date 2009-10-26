@@ -75,7 +75,7 @@ class ResponsesController < ApplicationController
   end
 
   def random
-    @response = Response.find(:first, :order => "RANDOM()")
+    @response = Response.find(:first, :order => "RAND()")
     render :action => :show
   end
   
