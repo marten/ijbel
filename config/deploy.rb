@@ -3,8 +3,9 @@ set :repository,  "git@github.com:marten/ijbel.git"
 set :branch,      "origin/master"
 set :migrate_target, :current
 set :application, "ijbel"
-set :deploy_to,   "/home/marten/web/ijbel.org"
+set :deploy_to,   "/var/www/ijbel.org"
 set :user,        "marten"
+set :use_sudo,    false
 
 role :web, "robinson.veldthuis.com"                          # Your HTTP server, Apache/etc
 role :app, "robinson.veldthuis.com"                          # This may be the same as your `Web` server

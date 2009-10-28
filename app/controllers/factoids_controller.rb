@@ -30,6 +30,22 @@ class FactoidsController < ApplicationController
     end
   end
   
+  def create
+    @factoid = Factoid.new(params[:factoid])
+    
+    if @factoid.save
+      respond_to do |format|
+        format.html { redirect_to @factoid }
+        format.xml  { render :xml => @factoid.to_xml(:include => [:triggers, :responses]) }
+      end
+    else
+      respond_to do |format|
+        format.html { render :action => :new }
+        format.xml  { render :xml => @factoid.errors.to_xml, :status => :unprocessable_entity }
+      end
+    end
+  end
+  
   def delete
     @factoid = Factoid.find(params[:id])
 
@@ -37,11 +53,20 @@ class FactoidsController < ApplicationController
     when :get
       render
     when :post
-      @destination = Factoid.find(params[:destination])
-      @destination.triggers  << @factoid.triggers
-      @destination.responses << @factoid.responses
+      if not params[:destination].blank?
+        @destination = Factoid.find(params[:destination])
+        @destination.triggers  << @factoid.triggers
+        @destination.responses << @factoid.responses
+      end
+      
       @factoid.destroy
-      redirect_to @destination
+      flash[:notice] = "Factoid #{@factoid.id} destroyed."
+      
+      if not params[:destination].blank?
+        redirect_to @destination
+      else
+        redirect_to factoids_path
+      end
     end
   end
   

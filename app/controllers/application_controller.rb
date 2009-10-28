@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
   
   private
     def authenticate
-      authenticate_or_request_with_http_basic do |username, password|
+      authenticate_or_request_with_http_basic("Wachtwoord? Vraag de bot maar, !admin") do |username, password|
         (Rails.env.development?) || (username == USERNAME && password == PASSWORD)
       end
     end

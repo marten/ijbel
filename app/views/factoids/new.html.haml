@@ -2,10 +2,10 @@
 
 - semantic_form_for(@factoid) do |f|
 	- f.semantic_fields_for :triggers do |t|
-		= t.inputs :name => "Trigger"
+		= t.inputs :value, :name => "Trigger"
 	
 	- f.semantic_fields_for :responses do |r|
-		= r.inputs :name => "Response"
+		= r.inputs :value, :name => "Response"
 	
 	= f.buttons
 		
