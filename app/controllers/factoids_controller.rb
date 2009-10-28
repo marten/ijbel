@@ -10,6 +10,12 @@ class FactoidsController < ApplicationController
     end
   end
   
+  def new
+    @factoid = Factoid.new
+    @factoid.triggers.build
+    @factoid.responses.build
+  end
+  
   def show
     @factoid = Factoid.find(params[:id])
   end
