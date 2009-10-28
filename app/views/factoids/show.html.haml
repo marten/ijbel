@@ -22,8 +22,10 @@
 					%td
 						= h(response.value).split("\\n").join("<br/>")
 						= link_to("Delete", factoid_response_path(@factoid, response), :method => :delete)
-					%td(style="text-align: center")
+					%td(style="text-align: center; font-family: Lucida Console; fixed")
+						= link_to("++", inc_karma_factoid_response_path(@factoid, response), :method => :put)
 						= response.karma
+						= link_to("--", dec_karma_factoid_response_path(@factoid, response), :method => :put)
 				- else
 					%td(colspan="2")
 		%tr

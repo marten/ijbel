@@ -79,6 +79,16 @@ class ResponsesController < ApplicationController
     render :action => :show
   end
   
+  def inc_karma
+    Response.increment_counter(:karma, params[:id])
+    redirect_to(Response.find(params[:id], :include => :factoid).factoid)
+  end
+  
+  def dec_karma
+    Response.decrement_counter(:karma, params[:id])
+    redirect_to(Response.find(params[:id], :include => :factoid).factoid)
+  end
+  
   protected
     def find_factoid
       @factoid = Factoid.find(params[:factoid_id])
