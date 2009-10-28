@@ -4,7 +4,8 @@
 	%thead
 		%tr
 			%th(style="width: 50%") Triggers
-			%th(style="width: 50%") Responses
+			%th(style="width: 44%") Responses
+			%th(style="width: 6%; text-align: center") Karma
 	%tbody
 		- (0..([@factoid.triggers.size, @factoid.responses.size].max - 1)).each do |idx|
 			%tr
@@ -19,17 +20,19 @@
 				- if idx < @factoid.responses.size
 					- response = @factoid.responses[idx]
 					%td
-						= h(response.value)
+						= h(response.value).split("\\n").join("<br/>")
 						= link_to("Delete", factoid_response_path(@factoid, response), :method => :delete)
+					%td(style="text-align: center")
+						= response.karma
 				- else
-					%td
+					%td(colspan="2")
 		%tr
 			%td
 				- semantic_form_for(@factoid.triggers.build, :url => factoid_triggers_path(@factoid)) do |f|
 					= f.inputs :value
 					= f.buttons
 					
-			%td
+			%td(colspan="2")
 				- semantic_form_for(@factoid.responses.build, :url => factoid_responses_path(@factoid)) do |f|
 					= f.inputs :value
 					= f.buttons

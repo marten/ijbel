@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(:version => 20091028185600) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "factoid_id"
-    t.integer  "karma"
+    t.integer  "karma",      :default => 0, :null => false
   end
 
   create_table "triggers", :force => true do |t|
