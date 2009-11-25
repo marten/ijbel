@@ -10,6 +10,10 @@ a:hover {
   background: black;
   color: white; }
 
+code {
+  font-family: Lucida Console, fixed;
+  font-size: 0.95em; }
+
 table {
   width: 100%;
   border-collapse: collapse;
